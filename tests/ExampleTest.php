@@ -1,13 +1,7 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-
-class ExampleTest extends TestCase
+class ExampleTest extends FeatureTestCase
 {
-    //use DatabaseMigrations;
-    use DatabaseTransactions;
 
     public function testBasicExample()
     {
@@ -25,4 +19,6 @@ class ExampleTest extends TestCase
             ->see($name)
             ->see($email);
     }
+
+
 }
