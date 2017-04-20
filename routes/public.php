@@ -4,7 +4,7 @@
 |   Web Routes
 |--------------------------------------------------------------------------*/
 
-Route::get('/', function (){  return view('welcome');   });
+Route::get( '/', ['as' => 'post.index', 'uses' => 'PostController@index'] );
 
 Auth::routes();
 
