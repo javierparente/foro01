@@ -8,7 +8,7 @@ class ExampleTest extends FeatureTestCase
         $name = 'Javier Parente';
         $email = 'javierparente@gmail.com';
 
-        $user = factory(\App\User::class)->create([
+        $user = factory(\App\Entities\User::class)->create([
             'name' => $name,
             'email' => $email,
         ]);
