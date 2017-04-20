@@ -1,6 +1,7 @@
 <?php
 
 use App\Entities\Post;
+use Carbon\Carbon;
 
 class PostsListTest extends FeatureTestCase
 {
@@ -12,7 +13,7 @@ class PostsListTest extends FeatureTestCase
             'title' => 'Titulo Post 0'
         ]);
 
-        dd($post->url);
+        //dd($post->url);
 
         // Accedemos a la ruta.
         $this->visit('/');
@@ -29,21 +30,19 @@ class PostsListTest extends FeatureTestCase
     public function test_the_posts_are_paginated()
     {
         // Having
-        $first = factory(Post::class)->create(['title' => 'El primer Post']);
+        $first = factory(Post::class)->create(['title' => 'Post más Antiguo', 'created_at'=> Carbon::now()->subDays(2)]);
 
-        //dd($first);
+        factory(Post::class)->times(15)->create( [ 'created_at'=>now()->subDay(1) ]);
 
-        factory(Post::class)->times(15)->create();
-
-        $last = factory(Post::class)->create(['title' => 'El último Post']);
+        $last = factory(Post::class)->create(['title' => 'Post más Reciente', 'created_at' => Carbon::now()]);
 
         // Si el usuario visita la página de Posts '/' debería poder ver el primer post $first pero no debería
         // Poder ver el último post 'last'
         $this->visit('/')
-            ->see($first->title)
-            ->dontSee($last->title)
-            ->click('2')
             ->see($last->title)
-            ->dontSee($first->title);
+            ->dontSee($first->title)
+            ->click('2')
+            ->see($first->title)
+            ->dontSee($last->title);
     }
 }
