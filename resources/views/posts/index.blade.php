@@ -25,6 +25,8 @@
 
                     </ul>
 
+                    <p>{{ $posts->links() }}</p>
+
                 </div><!--row-->
 
             </div><!--col-xs-12-->

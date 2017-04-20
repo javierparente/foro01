@@ -1,5 +1,7 @@
 <?php
 
+use App\Entities\Post;
+
 class PostsListTest extends FeatureTestCase
 {
 
@@ -22,6 +24,26 @@ class PostsListTest extends FeatureTestCase
         $this->click($post->title);
         // Y nos lleva a la url del $post
         $this->seePageIs($post->url);
+    }
 
+    public function test_the_posts_are_paginated()
+    {
+        // Having
+        $first = factory(Post::class)->create(['title' => 'El primer Post']);
+
+        //dd($first);
+
+        factory(Post::class)->times(15)->create();
+
+        $last = factory(Post::class)->create(['title' => 'El último Post']);
+
+        // Si el usuario visita la página de Posts '/' debería poder ver el primer post $first pero no debería
+        // Poder ver el último post 'last'
+        $this->visit('/')
+            ->see($first->title)
+            ->dontSee($last->title)
+            ->click('2')
+            ->see($last->title)
+            ->dontSee($first->title);
     }
 }
