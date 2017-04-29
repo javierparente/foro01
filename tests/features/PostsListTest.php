@@ -15,15 +15,15 @@ class PostsListTest extends FeatureTestCase
 
         //dd($post->url);
 
-        // Accedemos a la ruta.
+        // Access to the route.
         $this->visit('/');
-        // El h1 debe contener la palabra Posts que es el título h1
+        // El h1 must contain the word Posts that is the title h1
         $this->seeInElement('h1', 'Posts');
-        // Debemos ver en la página el título del post
+        // We must see in the page the title of the post
         $this->see($post->title);
-        // Debemos poder hacer click encima del título.
+        // We must do click on the title.
         $this->click($post->title);
-        // Y nos lleva a la url del $post
+        // this take to the url of the post
         $this->seePageIs($post->url);
     }
 
@@ -32,11 +32,11 @@ class PostsListTest extends FeatureTestCase
         // Having
         $first = factory(Post::class)->create(['title' => 'Post más Antiguo', 'created_at'=> Carbon::now()->subDays(2)]);
 
-        factory(Post::class)->times(15)->create( [ 'created_at'=>now()->subDay(1) ]);
+        factory(Post::class)->times(15)->create( [ 'created_at'=>Carbon::now()->subDay(1) ]);
 
         $last = factory(Post::class)->create(['title' => 'Post más Reciente', 'created_at' => Carbon::now()]);
 
-        // Si el usuario visita la página de Posts '/' debería poder ver el primer post $first pero no debería
+        // If the user visit the page Posts '/' debería poder ver el primer post $first pero no debería
         // Poder ver el último post 'last'
         $this->visit('/')
             ->see($last->title)
@@ -45,4 +45,5 @@ class PostsListTest extends FeatureTestCase
             ->see($first->title)
             ->dontSee($last->title);
     }
+
 }

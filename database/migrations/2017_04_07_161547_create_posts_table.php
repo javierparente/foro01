@@ -21,7 +21,7 @@ class CreatePostsTable extends Migration
 
             $table->string('title');
             $table->string('slug');
-            $table->string('content');
+            $table->text('content');
             $table->boolean('pending')->default(true);
 
             $table->timestamps();

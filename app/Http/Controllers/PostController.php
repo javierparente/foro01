@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ class PostController extends Controller
     public function index()
     {
         //$posts = Post::all();
-        $posts = Post::orderBy('created_at', 'DESC')->paginate();
+        $posts = Post::orderBy('created_at', 'DESC' )->paginate(10);
 
         //dd($posts->pluck('created_at')->toArray());
 
@@ -24,9 +25,7 @@ class PostController extends Controller
         //return view('posts.index', compact('posts'));
 
         return view( 'posts.index', ['posts'=>$posts] );
-
     }
-
 
     /**
      * Display the specified resource.
@@ -36,8 +35,8 @@ class PostController extends Controller
      */
     public function show(Post $post, $slug)
     {
-        // Compruebo que el slug de la BD es el que recibimos,
-        // Si no se cumple abortamos con error 404.
+        // We check the slug of BD is equal that we receive,
+        // if is not the same abort with error 404.
         if($post->slug != $slug){
             return redirect ($post->url);
         }
