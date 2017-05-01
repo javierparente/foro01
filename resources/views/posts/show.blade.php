@@ -6,7 +6,7 @@
 
     <h1>{{$post->title}}</h1>
 
-    <p>{{$post->content}}</p>
+    {!! $post->safe_html_content !!}
 
     <p>{{$post->user->name}}</p>
 
