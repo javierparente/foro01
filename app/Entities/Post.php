@@ -9,6 +9,7 @@ class Post extends Model
 {
     protected $fillable = ['title', 'content', 'user_id'];
 
+    // We indicate that property $cast must be boolean
     protected $casts = [ 'pending' => 'boolean' ];
 
 
@@ -20,6 +21,11 @@ class Post extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function latestComments()
+    {
+        return $this->comments()->orderBy('created_at', 'DESC');
     }
 
     public function setTitleAttribute($value)
@@ -35,4 +41,5 @@ class Post extends Model
     {
         return route('posts.show',[$this->id, $this->slug]);
     }
+
 }

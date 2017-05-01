@@ -29,7 +29,6 @@ class Comment extends Model
         $this->post->save();
     }
 
-
 }
 
 

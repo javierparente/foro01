@@ -8,11 +8,10 @@ class CreatePostTest extends FeatureTestCase
      */
     public function test_a_user_create_a_post()
     {
-        // Creamos un nuevo usuario con el método defaultUser();
+        // Create a new user with the method defaultUser();
         $user = $this->defaultUser();
 
-        // Having
-        // Teniendo una inf y un User conectado
+        // Having a inf and a user connected
         $title = 'Esta es una pregunta';
         $content = 'Este es el contenido';
 
@@ -36,9 +35,10 @@ class CreatePostTest extends FeatureTestCase
             'slug' => str_slug($title, '-'),                // Creamos el slug
         ]);
 
-        // El usuario es redirigido al detalle del post
-        // $this->seeInElement('h1', $title);               // Comprobar si el usuario fue redirigido a otra pag
-        $this->see($title);
+        // the user is redirect to the detail of the post
+        // $this->seeInElement('h1', $title);
+        // Check if the user was redirect to another page
+        $this->dontSee($title);
     }
 
     /**

@@ -22,4 +22,14 @@ class CommentController extends Controller
 
         return redirect($post->url);
     }
+
+    public function accept(Comment $comment)
+    {
+        // We Implements the access policy, if there is error it send to error 403.
+        $this->authorize('accept', $comment);
+
+        $comment->markAsAnswer();
+
+        return redirect($comment->post->url);
+    }
 }

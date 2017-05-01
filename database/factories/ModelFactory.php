@@ -23,7 +23,8 @@ $factory->define(App\Entities\Post::class, function(Faker\Generator $faker) {
     $post = [
         'title' => $faker->sentence,
         'content' => $faker->paragraph,
-        'pending' => $faker->boolean(),
+        'pending' => true,
+        //'pending' => $faker->boolean(),
         'user_id' => function () {
             // Create a User inside of the Post whenever it is not personalized. Create a new one.
             return factory(\App\Entities\User::class)->create()->id;

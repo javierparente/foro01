@@ -17,22 +17,20 @@ class CreatePostController extends Controller
 
     public function store(Request $request)
     {
-        //$post = Post::create($request->all());
-
-        $this->validate($request,[
+        $this->validate($request, [
             'title' => 'required',
             'content' => 'required'
         ]);
 
+        //$post = Post::create($request->all());
         $post = new Post($request->all());
 
+        //auth()->user()->posts()->save($post);
         Auth::user()->posts()->save($post);
 
-        //auth()->user()->posts()->save($post);
-
-        return $post->title;
+        //return redirect('posts/'.$post->id.'-'.$post->slug);
+        return redirect()->route('posts.show',[$post->id,$post->slug]);
     }
-
 
 }
 

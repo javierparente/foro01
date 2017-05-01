@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Entities\Comment;
 use Illuminate\Support\ServiceProvider;
+use App\Policies\CommentPolicy;
 
 class AppServiceProvider extends ServiceProvider
 {
