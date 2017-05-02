@@ -22,6 +22,12 @@ Route::post('posts/{post}/comment', [
     'as' => 'comments.store'
 ]);
 
+
+Route::post('posts/{post}/subscribe',[
+    'uses' => 'SubscriptionController@subscribe',
+    'as' => 'post.subscribe'
+]);
+
 /**------------------------------------------------------------------------*
 |    Comments
 |--------------------------------------------------------------------------*/

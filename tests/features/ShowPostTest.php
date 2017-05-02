@@ -1,30 +1,20 @@
 <?php
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use \App\Entities\Post;
-use \App\Entities\User;
-
 
 class ShowPostTest extends FeatureTestCase
 {
-    public function testExample()
-    {
-        $this->assertTrue(true);
-    }
-
     /**
-     * Comprobar un usurario puede ver los detalles del post
+     * We check that an user can see the details of the post
      */
     public function test_a_user_can_see_the_post_details()
     {
         // Having
-        // Creamos un nuevo usuario con el método defaultUser();
+        // We create a new user with the method defaultUser();
         $user = $this->defaultUser([
             'name' => 'Javier Parente',
         ]);
 
-        // Creamos un Post pero no lo guardamos en la base de datos. Usamos para ello make
+        // We create a Post but don´t guard into the BD. We use make for that
         $post = factory(\App\Entities\Post::class)->create([
             'title' => 'Este es el título del post',
             'content' => 'Este es el contenido del post',
@@ -41,13 +31,15 @@ class ShowPostTest extends FeatureTestCase
         //dd(Post::all()->toArray());
 
         // When
-        //1.- Visitamos la ruta, 2.- Comprobamos si un elem h1 tiene el $post->title,
-        //3.- Comprobamos que tiene el contenido del post, y 4.- Si tiene el nombre del usuario
-        //$this->visit( route( 'posts.show', [$post->id, $post->slug] ) )     // refactorizamos en el modelo Post creando un ACCESOR
+        // 1.- We visit the route, 2.- We check if the element h1 has the $post->title,
+        // 3.- We check that it has the content of the post, and, 4.- if it has the username
+        // The route is: $this->visit( route( 'posts.show', [$post->id, $post->slug] ) )
+        // Re Factoring the model Post creating a ACCESOR.
         $this->visit( $post->url )
             ->seeInElement('h1',$post->title)
             ->see($post->content)
-            ->see('Javier Parente');
+            //->see('Javier Parente')
+            ;
 
     }
 

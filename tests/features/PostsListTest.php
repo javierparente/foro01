@@ -36,14 +36,15 @@ class PostsListTest extends FeatureTestCase
 
         $last = factory(Post::class)->create(['title' => 'Post más Reciente', 'created_at' => Carbon::now()]);
 
-        // If the user visit the page Posts '/' debería poder ver el primer post $first pero no debería
-        // Poder ver el último post 'last'
+        // If the user visit the page Posts '/'
+        // could see the first post $first but must not
+        // you can see the last post '$last'
         $this->visit('/')
             ->see($last->title)
             ->dontSee($first->title)
             ->click('2')
-            ->see($first->title)
             ->dontSee($last->title);
     }
 
 }
+
